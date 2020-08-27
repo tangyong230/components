@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "9d8bbb2853c19960a10304ec3a60d094",
+    "packages": [
+        {
+            "name": "tangyong/library",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tangyong230/library.git",
+                "reference": "4ea1c6081996000fdda70733c71ae3ec73f1f3e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tangyong230/library/zipball/4ea1c6081996000fdda70733c71ae3ec73f1f3e5",
+                "reference": "4ea1c6081996000fdda70733c71ae3ec73f1f3e5",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "tangyong\\library\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "tangyong",
+                    "email": "china.php@qq.com"
+                }
+            ],
+            "description": "basic library",
+            "time": "2020-08-27T03:07:14+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

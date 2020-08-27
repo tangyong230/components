@@ -1,0 +1,21 @@
+{
+    "name": "tangyong/component",
+    "description": "customer components",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "tangyong",
+            "email": "china.php@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "tangyong/library": "v1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "tangyong\\component\\": "src"
+        }
+    }
+}
