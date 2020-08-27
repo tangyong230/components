@@ -16,76 +16,92 @@ class Session
 
     const TAG = "XSESSIONID";
 
-    /**设置
-     * @param $data
-     * @param null $prefix
-     * @throws SdkException
+    /** 设置 session值
+     * @param $key
+     * @param $value
+     * @throws TSdkException
      */
-    public function set($data,$prefix=null){
-        $key = $this->getKey();
-        $oldKey = $key;
-        !empty($prefix)&&$key=$prefix.$key;
+    public static function set($key,$value){
+        if(empty($key)||empty($value)){
+            throw new SdkException("session键与值不能为空");
+        }
+        $key_1 = self::getKey();
+        $key.=$key_1;
         $objRedis = ConsistentHash::getInstance()->lookUp($key);
         if(empty($objRedis)){
-            throw new SdkException("获取redis节点实例失败");
+            throw new TSdkException("session驱动redis节点实例失败");
         }
-        $objRedis->setex($key,600,$data);
-        $this->saveToCookie($oldKey);
+        $objRedis->setex($key,600,$value);
+        self::saveToCookie($key_1);
     }
 
-    /** 获取
-     * @param null $prefix
+    /**获取指定session值
+     * @param $key
      * @return bool|mixed|string
-     * @throws SdkException
+     * @throws TSdkException
      */
-    public function get($prefix=null){
-        $key = $this->getKey();
-        !empty($prefix)&&$key=$prefix.$key;
+    public static function get($key){
         if(empty($key)){
             return false;
         }
+        $key_1 = self::getKey();
+        $key.=$key_1;
         $objRedis = ConsistentHash::getInstance()->lookUp($key);
         if(empty($objRedis)){
-            throw new TSdkException("获取redis节点实例失败");
+            throw new TSdkException("session驱动redis节点实例失败");
         }
         return $objRedis->get($key);
     }
 
     /**
-     *
+     * 清空session
      */
-    public function del(){
+    public static function destroy(){
         setcookie(self::TAG,'',time()-1,"/");
+    }
+
+    /** 删除指定session
+     * @param $key
+     * @return bool|int
+     * @throws TSdkException
+     */
+    public static function del($key){
+        if(empty($key)){
+            return false;
+        }
+        $key_1 = self::getKey();
+        $key.=$key_1;
+        $objRedis = ConsistentHash::getInstance()->lookUp($key);
+        if(empty($objRedis)){
+            throw new TSdkException("session驱动redis节点实例失败");
+        }
+        return $objRedis->del($key);
     }
 
     /** 生成cookie
      * @param $key
      */
-    private function saveToCookie($key){
+    private static function saveToCookie($key){
         setcookie(self::TAG,$key,0,"/");
     }
 
     /** 获取key
      * @return mixed|string
      */
-    private function getKey(){
+    private static function getKey(){
         $key = isset($_COOKIE[self::TAG])?$_COOKIE[self::TAG]:"";
-        empty($key)&&$key = $this->generateKey();
+        empty($key)&&$key = self::generateKey();
         return $key;
     }
 
     /** 生成唯一key
      * @return string
      */
-    private function generateKey(){
+    private static function generateKey(){
         $hash = hash("sha256",$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].microtime());
         $uniqid = str_replace(".","",uniqid('',true));
         $key = md5(strtoupper($hash.$uniqid));
         return $key;
-    }
-
-    public static function test(){
-        echo 1;
     }
 
 }

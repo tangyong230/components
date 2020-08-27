@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d8bbb2853c19960a10304ec3a60d094",
+    "content-hash": "ab3e190ed34dcec58eef2998d2dda3dc",
     "packages": [
         {
             "name": "tangyong/library",
-            "version": "v1.0",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tangyong230/library.git",
-                "reference": "4ea1c6081996000fdda70733c71ae3ec73f1f3e5"
+                "reference": "a9448403678fd09803d14e39e0327b7d2f8b6eef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tangyong230/library/zipball/4ea1c6081996000fdda70733c71ae3ec73f1f3e5",
-                "reference": "4ea1c6081996000fdda70733c71ae3ec73f1f3e5",
+                "url": "https://api.github.com/repos/tangyong230/library/zipball/a9448403678fd09803d14e39e0327b7d2f8b6eef",
+                "reference": "a9448403678fd09803d14e39e0327b7d2f8b6eef",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -43,7 +43,7 @@
                 }
             ],
             "description": "basic library",
-            "time": "2020-08-27T03:07:14+00:00"
+            "time": "2020-08-27T09:34:40+00:00"
         }
     ],
     "packages-dev": [],
