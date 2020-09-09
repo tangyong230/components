@@ -15,13 +15,14 @@ class Session
 {
 
     const TAG = "XSESSIONID";
+    const EXPIRE_TIME = 7*24*3600;
 
     /** 设置 session值
      * @param $key
      * @param $value
      * @throws TSdkException
      */
-    public static function set($key,$value){
+    public static function set($key,$value,$expire=null){
         if(empty($key)||empty($value)){
             throw new SdkException("session键与值不能为空");
         }
@@ -31,7 +32,7 @@ class Session
         if(empty($objRedis)){
             throw new TSdkException("session驱动redis节点实例失败");
         }
-        $objRedis->setex($key,600,$value);
+        empty($expire)?$objRedis->setex($key,self::EXPIRE_TIME,$value):$objRedis->setex($key,$expire,$value);
         self::saveToCookie($key_1);
     }
 
