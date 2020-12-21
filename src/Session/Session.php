@@ -99,7 +99,9 @@ class Session
      * @return string
      */
     private static function generateKey(){
-        $hash = hash("sha256",$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].microtime());
+        $remote_addr = isset($_SERVER['REMOTE_ADDR'])?$_SERVER['REMOTE_ADDR']:mt_rand(10000,55555);
+        $agent = isset($_SERVER['HTTP_USER_AGENT'])?$_SERVER['HTTP_USER_AGENT']:mt_rand(55555,99999);
+        $hash = hash("sha256",$remote_addr.$agent.microtime());
         $uniqid = str_replace(".","",uniqid('',true));
         $key = md5(strtoupper($hash.$uniqid));
         return $key;
